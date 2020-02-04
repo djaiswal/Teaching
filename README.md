@@ -9,4 +9,6 @@ CourseName/Lectures :- Lectures Notes
 
 CourseName/ReadingMaterial:- Papers etc. 
 
-CourseName/HW:- Homework Assignments
+CourseName/HW:- Homework Assignments 
+
+CourseName/HW:- Labs
