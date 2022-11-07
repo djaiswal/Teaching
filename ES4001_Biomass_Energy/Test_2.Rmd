@@ -1,0 +1,64 @@
+---
+title: "Biomass Energy Test 2"
+author: "Deepak Jaiswal"
+date: '2022-11-07'
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+The total dry biomass of a plant (W) at a time t (t=0 just at the time of emergence) can be approximated by the Gompertz growth function (equation 1) with parameters μ~0~ (specific growth rate at t=0), D (parameter describing the decay in the specific growth rate), and W~0~ (W at t=0; a proxy for planting rate or leftover from the previous harvest).
+
+$$W = W_{0}e^{\frac{\mu_{0}(1-e^{-Dt})}{D}} $$
+
+
+The three parameters (W~0~,μ~0~,D) for two bioenergy crops: sugarcane and miscanthus were estimated (Table 1) using field data from two experimental sites in Sao Paulo Brazil and Illinois USA, respectively.
+
+
+```{r optimized_parameters_for_gompertz_equation}
+gompertz_W <- function(W0,mu0,D,t){
+  output <- W0*exp(mu0*(1-exp(t*D*(-1)))/D)
+  return(output)
+}
+
+t_sugarcane = seq(0,360)
+sugarcane_w = list(t=c(0,100,200,300,360),w=c(1,5,40,80,90))
+
+sugarcane_initial = c(1,0.3,0.065)
+objective_function <- function(gompertz_params,observation){
+  predicted <- gompertz_W(gompertz_params[1],gompertz_params[2],gompertz_params[3],observation$t)
+  error = predicted - observation$w
+  E = sum(error^2)
+  return(E)
+}
+
+sugarcane_parameters <- optim(par = sugarcane_initial,fn = objective_function,observation=sugarcane_w)
+sugarcane_parameters
+# 0.345142126 0.048789476 0.008296256
+
+
+miscanthus_w = list(t=c(0,50,100,210),w=c(15,25,50,70))
+miscanthus_initial = c(1,0.3,0.065)
+miscanthus_parameters <- optim(par = miscanthus_initial,fn = objective_function,observation=miscanthus_w)
+miscanthus_parameters
+# 12.48171670  0.02291015  0.01219524
+
+
+## Plotting biomass of sugarcane and miscanthus
+
+t_sugarcane = seq(0,360)
+sugarcane_w = gompertz_W(W0=0.345142126 ,mu0 = 0.048789476,D=0.008296256,t=t_sugarcane)
+lattice::xyplot(sugarcane_w~t_sugarcane)
+
+t_mxg = seq(0,210)
+miscanthus_w <- gompertz_W(W0=12.48171670 ,mu0 = 0.02291015,D=0.01219524,t=t_mxg)
+lattice::xyplot(miscanthus_w~t_mxg)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
