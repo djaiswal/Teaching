@@ -1,7 +1,5 @@
 ---
-title: "Biomass Energy Test 2"
-author: "Deepak Jaiswal"
-date: '2022-11-07'
+title: "Biomass Energy (ES 4001) Test 2"
 output:
   html_document:
     df_print: paged
@@ -11,7 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Description
 The total dry biomass of a plant (W in tons ha$^{-1}$) at a time $t$ (days) ($t_{peak} \ge$ $t \ge t$~0~) can be approximated by the Gompertz growth function with parameters μ~0~ (specific growth rate at t~0~), D (parameter describing the decay in the specific growth rate), and W~0~ (W at t~0~; a proxy for planting rate or leftover from the previous harvest). The gompertz growth function is given below:
 \begin{align}
 W = W_{0}e^{\frac{\mu_{0}(1-e^{-Dt})}{D}}
@@ -69,14 +67,14 @@ lattice::xyplot(miscanthus_w~t_mxg)
 
 |Bioenergy crop|W~0~ (tons ha$^{-1}$) |μ~0~ ($day^{-1}$)| D($day^{-1}$)| t~0~ (days)|  $t_{peak}$ (days)|
 |:------------|----:|---:|----:|---:|---:|
-|Sugarcane    | 0.345  | 0.048|  0.0082|      0 (5th Jan)|         ~360 (30 Dec)|
-|Miscanthus   | 12.481|  0.023|  0.0121|      0(5th Apr)|         ~210 (1 Nov)|
+|Sugarcane    | 0.345  | 0.048|  0.0082|      0 (5th Jan)|         360 (30 Dec)|
+|Miscanthus   | 12.481|  0.023|  0.0121|      0(5th Apr)|         210 (1 Nov)|
 
 The approximate partitioning of total biomass into various components: stem and leaves (above-ground) and roots and rhizome (below-ground) are given in the table below
 
 |Bioenergy crop| Stem | Leaves| Below-ground|
 |:------------|----:|---:|----:|
-|Sugarcane    | 0.84  | 0.10|  0.06|     
+|Sugarcane ($t$ (days) ($t_{peak} \ge$ $t \ge t$~0~)   | 0.84  | 0.10|  0.06|     
 |Miscanthus ($t \le 100$)  | 0.25|  0.05|  0.7|  
 |Miscanthus ($t \gt 100$)   | 0.6|  0.05|  0.35| 
 
@@ -85,16 +83,17 @@ The day of harvest ($t_{harvest}$) for sugarcane coincides with the day of peak 
 
 Assume that 
 
-1. miscanthus harvesting is planned for the 15th of March of next year resulting in a gap of 135 days between  ($day^{-1}$ = 345 ) and ($t_{peak}$ = 210). 
+1. miscanthus harvesting is planned for the 15th of March of next year resulting in a gap of 135 days between  ($t_{harvest}$ = 345 ) and ($t_{peak}$ = 210). 
 2. During the period between $t_{peak}$ and $t_{harvest}$, the standing (on the field) above-ground biomass is lost at a rate of 0.07 tons $day^{-1}$
 
-**Question 1. Draw a curve showing biomass of stem, leaves, and below-ground components on the Y axis (tons ha$^{-1}$) and time ($t$) on the x axis from $t_{0}$ to $t_{harvest}$ for miscanthus and sugarcane. [max score = 5]**
+**Question 1. Draw a flow diagram showing all the processes from farm to wheel involved in the production of bio fuel (cellolosic ethanol) using dedicated biomass energy crop (sugarcane and miscanthus), transport, and final consumption of the same.You can use microsoft word/ google doc/ or any other program. Some softwares to make such process flow diagrams are listed [here](https://www.edrawsoft.com/5-best-process-flow-diagram-software.html), you can also use trial version of any of the software. An example process flow diagram is [here](https://www.researchgate.net/publication/286954336_Comparison_of_the_potential_for_ethanol_production_from_rice_straw_in_Vietnam_and_Japan_via_techno-economic_evaluation/figures?lo=1). Your answer will be evaluated based on the number of processes, details of each proces, and aesthetics/clarity. [max score = 6]**
+
+**Question 2. Draw a curve showing biomass of stem, leaves, and below-ground components on the Y axis (tons ha$^{-1}$) and time ($t$) on the x axis from $t_{0}$ to $t_{harvest}$ for miscanthus and sugarcane. [max score = 6]**
 
 
-**Question 2.Calculate the amount of biomass that can be transported from 1ha of miscanthus and sugarcane fields to a nearby bio refinery for producing bio ethanol ethanol assuming harvesting occurs on t= $t_{harvest}$ for both sugarcane and miscanthus . [max score =2]**
+**Question 3. Calculate the amount of biomass that can be transported from 1ha of miscanthus and sugarcane fields to a nearby bio refinery for producing bio ethanol assuming that harvesting occurs on t= $t_{harvest}$ for both sugarcane and miscanthus . [max score =4]**
 
-**Question 3. Calculate the amount of biomass assimilated into the soil of field used for growing sugarcane and miscanthus. You can use fraction of below-ground biomass dying since the date of harvest to the starting of new growing cycle as shown in the table below. [max score =2] **
-
+**Question 4. Calculate the amount of biomass assimilated into the soil of field used for growing sugarcane and miscanthus. You can use fraction of below-ground biomass dying since the date of harvest to the starting of new growing cycle as shown in the table below. You can also assume that all the standing above-ground biomass is harvested and transported to a biorefinery on the harvest day [max score =4] **
 
 
 |Bioenergy crop| Fraction of dead below-ground biomass (between harvest and start of next growth cycle)|
